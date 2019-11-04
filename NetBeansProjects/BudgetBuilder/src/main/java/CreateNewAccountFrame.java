@@ -1,7 +1,7 @@
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,21 +13,20 @@ import java.awt.event.*;
  *
  * @author zhijiejennyxu
  */
-public class EntryFrame extends JFrame{
-    private CreateNewAccountFrame newAccountFrame;
+public class CreateNewAccountFrame extends JFrame{
+    private EntryFrame entryFrame;
     
-    public EntryFrame (){
-        this.setTitle("Budget Builder");
+    public CreateNewAccountFrame(){
+        this.setTitle("Create a new account");
         this.setMaximumSize(new Dimension(800,600));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         JPanel userinfoPanel = getUserinfoPanel();
         JPanel buttonPanel = getButtonPanel();
-          
-        this.add(userinfoPanel, BorderLayout.CENTER);   
+        this.add(userinfoPanel, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.SOUTH);
     }
-
+    
     private JPanel getUserinfoPanel(){
         JPanel userinfoPanel = new JPanel();
         userinfoPanel.setBackground(Color.LIGHT_GRAY);
@@ -55,31 +54,29 @@ public class EntryFrame extends JFrame{
     
     private JPanel getButtonPanel(){
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(Color.DARK_GRAY);
+        
+        JButton nextButton = new JButton("NEXT");
+        JButton backButton = new JButton("BACK");
+        
+        buttonPanel.add(backButton);
+        buttonPanel.add(nextButton);
         Dimension buttonSize = new Dimension(100,40);
-        JButton loginButton = new JButton("Log In");
-        loginButton.setMaximumSize(buttonSize);
+        backButton.setMaximumSize(buttonSize);
+        nextButton.setMaximumSize(buttonSize);
         
-        JButton createNewAccountButton = new JButton("Create a new account.");
-        createNewAccountButton.setMaximumSize(buttonSize);
+        buttonPanel.add(backButton);
+        buttonPanel.add(nextButton);
         
-        GridLayout gridLayout = new GridLayout(0,1);
-        buttonPanel.setLayout(gridLayout);
-        buttonPanel.add(loginButton);
-        buttonPanel.add(createNewAccountButton);
-        
-        createNewAccountButton.addActionListener(new ActionListener(){
+        backButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 dispose();
-                newAccountFrame = new CreateNewAccountFrame();
-                newAccountFrame.pack();
-                newAccountFrame.setLocationRelativeTo(null);
-                newAccountFrame.setVisible(true);
+                entryFrame = new EntryFrame();
+                entryFrame.pack();
+                entryFrame.setLocationRelativeTo(null);
+                entryFrame.setVisible(true);
             }
         });
         
         return buttonPanel;
-    } 
-    
-    
+    }
 }
