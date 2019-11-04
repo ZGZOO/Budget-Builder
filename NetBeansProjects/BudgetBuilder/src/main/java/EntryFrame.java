@@ -79,7 +79,5 @@ public class EntryFrame extends JFrame{
         });
         
         return buttonPanel;
-    } 
-    
-    
+    }     
 }

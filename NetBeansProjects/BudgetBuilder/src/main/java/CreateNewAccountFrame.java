@@ -13,6 +13,7 @@ import javax.swing.*;
  *
  * @author zhijiejennyxu
  */
+
 public class CreateNewAccountFrame extends JFrame{
     private EntryFrame entryFrame;
     
