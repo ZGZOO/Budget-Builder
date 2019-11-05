@@ -1,7 +1,8 @@
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -56,7 +57,7 @@ public class CreateNewAccountFrame extends JFrame{
     private JPanel getButtonPanel(){
         JPanel buttonPanel = new JPanel();
         
-        JButton nextButton = new JButton("NEXT");
+        JButton nextButton = new JButton("Create");
         JButton backButton = new JButton("BACK");
         
         buttonPanel.add(backButton);
