@@ -20,38 +20,49 @@ public class CreateNewAccountFrame extends JFrame{
     
     public CreateNewAccountFrame(){
         this.setTitle("Create a new account");
-        this.setMaximumSize(new Dimension(800,600));
+        this.setSize(new Dimension(800,600));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        JPanel userinfoPanel = getUserinfoPanel();
+        JPanel userInfoPanel = getUserInfoPanel();
         JPanel buttonPanel = getButtonPanel();
-        this.add(userinfoPanel, BorderLayout.CENTER);
+        this.add(userInfoPanel, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.SOUTH);
     }
     
-    private JPanel getUserinfoPanel(){
-        JPanel userinfoPanel = new JPanel();
-        userinfoPanel.setBackground(Color.LIGHT_GRAY);
+    private JPanel getUserInfoPanel(){
+        JPanel userInfoPanel = new JPanel();
+        userInfoPanel.setBackground(Color.LIGHT_GRAY);
         
         JLabel usernameLabel = new JLabel("Username: ");
         JLabel passwordLabel = new JLabel("Password: ");
-        
+
         JTextField usernameTextField = new JTextField(10);
         usernameTextField.setPreferredSize(new Dimension(40,30));
         usernameTextField.setEditable(true);
-        
-        JTextField passwordTextField = new JTextField(10);
+
+        //JPasswordField is a subclass of JTestField
+        JPasswordField passwordTextField = new JPasswordField(10);
         passwordTextField.setPreferredSize(new Dimension(10,20));
-        passwordTextField.setEditable(true);
-        
+//        passwordTextField.setEditable(true);
+
+        JPanel userNamePanel = new JPanel();
+        JPanel passwordPanel = new JPanel();
         GridLayout gridLayout = new GridLayout(0,2);
-        userinfoPanel.setLayout(gridLayout);
-        userinfoPanel.add(usernameLabel);
-        userinfoPanel.add(usernameTextField);
-        userinfoPanel.add(passwordLabel);
-        userinfoPanel.add(passwordTextField);
+        GridLayout userInfoLayout = new GridLayout(2,0);
+        userNamePanel.setLayout(gridLayout);
+        passwordPanel.setLayout(gridLayout);
+
+        userNamePanel.add(usernameLabel);
+        userNamePanel.add(usernameTextField);
+
+        passwordPanel.add(passwordLabel);
+        passwordPanel.add(passwordTextField);
+
+        userInfoPanel.setLayout(userInfoLayout);
+        userInfoPanel.add(userNamePanel);
+        userInfoPanel.add(passwordPanel);
         
-        return userinfoPanel;
+        return userInfoPanel;
     }
     
     private JPanel getButtonPanel(){
