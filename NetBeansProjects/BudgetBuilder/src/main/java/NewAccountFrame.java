@@ -15,12 +15,12 @@ import java.awt.event.ActionListener;
  * @author zhijiejennyxu
  */
 
-public class CreateNewAccountFrame extends JFrame{
+public class NewAccountFrame extends JFrame{
     private EntryFrame entryFrame;
     
-    public CreateNewAccountFrame(){
+    public NewAccountFrame(){
         this.setTitle("Create a new account");
-        this.setSize(new Dimension(800,600));
+        this.setPreferredSize(new Dimension(800,600));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         JPanel userInfoPanel = getUserInfoPanel();

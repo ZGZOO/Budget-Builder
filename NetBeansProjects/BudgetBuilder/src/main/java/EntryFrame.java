@@ -15,12 +15,13 @@ import java.util.ArrayList;
  * @author zhijiejennyxu
  */
 public class EntryFrame extends JFrame {
-    private CreateNewAccountFrame newAccountFrame;
+    private NewAccountFrame newAccountFrame;
     private ArrayList<User> userDatabase;
 
     public EntryFrame (){
         this.setTitle("Budget Builder");
         this.setSize(new Dimension(800,600));
+
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JPanel userInfoPanel = getUserInfoPanel();
@@ -74,7 +75,7 @@ public class EntryFrame extends JFrame {
         JButton loginButton = new JButton("Log In");
         loginButton.setMaximumSize(buttonSize);
         
-        JButton createNewAccountButton = new JButton("Create a new account.");
+        JButton createNewAccountButton = new JButton("Don't have your account?");
         createNewAccountButton.setMaximumSize(buttonSize);
         
         GridLayout gridLayout = new GridLayout(2,1);
@@ -85,7 +86,7 @@ public class EntryFrame extends JFrame {
         createNewAccountButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 dispose();
-                newAccountFrame = new CreateNewAccountFrame();
+                newAccountFrame = new NewAccountFrame();
                 newAccountFrame.pack();
                 newAccountFrame.setLocationRelativeTo(null);
                 newAccountFrame.setVisible(true);
