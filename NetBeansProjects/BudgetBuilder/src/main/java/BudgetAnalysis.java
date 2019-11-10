@@ -63,7 +63,6 @@ public class BudgetAnalysis {
             temp = it.next().getAmount();
             totalSpending += temp;
         }
-
         return (totalSpending + currentProfile.getSavings());
     }
 }

@@ -4,14 +4,13 @@ import java.awt.*;
 public class CategoryFrame extends JFrame {
     private JFrame incomeFrame;
     private JFrame UtilityFrame;
+    private JFrame spendingGraphFrame;
 
     public CategoryFrame() throws HeadlessException {
         this.setTitle("Budget Builder");
         this.setPreferredSize(new Dimension(1200,900));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         JPanel title = getTitlePanel();
-
         JPanel buttonPanel = getButtonsPanel();
         this.add(title, BorderLayout.NORTH);
         this.add(buttonPanel, BorderLayout.CENTER);
@@ -59,6 +58,12 @@ public class CategoryFrame extends JFrame {
             UtilityFrame.setVisible(true);
         });
 
+        SavingButton.addActionListener(e -> {
+            spendingGraphFrame = new SpendingGraphFrame();
+            spendingGraphFrame.pack();
+            spendingGraphFrame.setLocationRelativeTo(null);
+            spendingGraphFrame.setVisible(true);
+        });
         buttonPanel.add(IncomeButton);
         buttonPanel.add(UtilityButton);
         buttonPanel.add(SavingButton);
