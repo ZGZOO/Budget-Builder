@@ -1,26 +1,28 @@
+
 import javax.swing.*;
 import java.awt.*;
+
 /**
  *
  * @author zhijiejennyxu
  */
-public class InputNumbersForUtilityBudgetFrame extends JFrame{
+public class InputNumbersForSavingGoalFrame extends JFrame{
     private JLabel incomeLabel;
     private JTextField incomeNameTextField;
     private JTextField incomeValueTextField;
     private JPanel incomePanel;
 
-    private JLabel savingLabel;
-    private JTextField savingValueTextField;
-    private JPanel savingPanel;
+    private JLabel spendingLabel;
+    private JTextField spendingNameTextField;
+    private JTextField spendingValueTextField;
+    private JPanel spendingPanel;
 
     private JButton backButton;
     private JButton saveButton;
     private JPanel buttonPanel;
 
-
-    public InputNumbersForUtilityBudgetFrame(){
-        this.setTitle("Find your Utility Budget");
+    public InputNumbersForSavingGoalFrame(){
+        this.setTitle("Find your Savings");
         this.setMaximumSize(new Dimension(1000,1000));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setUpFrame();
@@ -31,7 +33,7 @@ public class InputNumbersForUtilityBudgetFrame extends JFrame{
 
     private void setUpFrame(){
         incomePanel = this.getIncomePanel();
-        savingPanel = this.getSavingPanel();
+        spendingPanel = this.getSpendingPanel();
         buttonPanel = this.getButtonPanel();
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -39,8 +41,8 @@ public class InputNumbersForUtilityBudgetFrame extends JFrame{
                 .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(savingPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(spendingPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(incomePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(126, Short.MAX_VALUE))
         );
@@ -49,7 +51,7 @@ public class InputNumbersForUtilityBudgetFrame extends JFrame{
                         .addGap(26, 26, 26)
                         .addComponent(incomePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(savingPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spendingPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(46, Short.MAX_VALUE))
@@ -89,43 +91,46 @@ public class InputNumbersForUtilityBudgetFrame extends JFrame{
         return income_Panel;
     }
 
-    private JPanel getSavingPanel(){
-        savingLabel = new JLabel("Savings:");
-        savingValueTextField = new JTextField("$:");
-        JPanel saving_Panel = new JPanel();
+    private JPanel getSpendingPanel(){
+        spendingLabel = new JLabel("Spending:");
+        spendingNameTextField = new JTextField("Spending Name");
+        spendingValueTextField = new JTextField("$:");
 
-        GroupLayout savingPanelLayout = new GroupLayout(saving_Panel);
-        saving_Panel.setLayout(savingPanelLayout);
-        savingPanelLayout.setHorizontalGroup(
-                savingPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(savingPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(savingPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(savingValueTextField)
-                                        .addGroup(savingPanelLayout.createSequentialGroup()
-                                                .addComponent(savingLabel)
-                                                .addContainerGap(143, Short.MAX_VALUE))))
+        JPanel spending_Panel = new JPanel();
+        GroupLayout spendingPanelLayout = new GroupLayout(spending_Panel);
+        spending_Panel.setLayout(spendingPanelLayout);
+        spendingPanelLayout.setHorizontalGroup(spendingPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(spendingPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(spendingPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addGroup(spendingPanelLayout.createSequentialGroup()
+                                        .addComponent(spendingLabel)
+                                        .addGap(0, 145, Short.MAX_VALUE))
+                                .addGroup(spendingPanelLayout.createSequentialGroup()
+                                        .addComponent(spendingNameTextField, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spendingValueTextField))))
         );
-        savingPanelLayout.setVerticalGroup(
-                savingPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(savingPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(savingLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(savingValueTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        spendingPanelLayout.setVerticalGroup(spendingPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(spendingPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(spendingLabel)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(spendingPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(spendingValueTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spendingNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(17, Short.MAX_VALUE))
         );
-        return saving_Panel;
+        return spending_Panel;
     }
 
     private JPanel getButtonPanel(){
         backButton = new JButton("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
                                          public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                             // add actions
+                                             //add actions
                                          }
-        });
-
+                                     });
         saveButton = new JButton("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,4 +161,5 @@ public class InputNumbersForUtilityBudgetFrame extends JFrame{
         );
         return button_Panel;
     }
+
 }

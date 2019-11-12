@@ -4,6 +4,7 @@ import java.awt.*;
 public class CategoryFrame extends JFrame {
     private JFrame incomeFrame;
     private JFrame UtilityFrame;
+    private JFrame SavingGoalFrame;
     private JFrame spendingGraphFrame;
 
     public CategoryFrame() throws HeadlessException {
@@ -15,7 +16,6 @@ public class CategoryFrame extends JFrame {
         this.add(title, BorderLayout.NORTH);
         this.add(buttonPanel, BorderLayout.CENTER);
     }
-
 
     public JPanel getTitlePanel() {
         JPanel titlePanel = new JPanel();
@@ -59,10 +59,14 @@ public class CategoryFrame extends JFrame {
         });
 
         SavingButton.addActionListener(e -> {
-            spendingGraphFrame = new SpendingGraphFrame();
-            spendingGraphFrame.pack();
-            spendingGraphFrame.setLocationRelativeTo(null);
-            spendingGraphFrame.setVisible(true);
+            try {
+                SavingGoalFrame = new InputNumbersForSavingGoalFrame();
+                SavingGoalFrame.pack();
+                SavingGoalFrame.setLocationRelativeTo(null);
+                SavingGoalFrame.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
         });
         buttonPanel.add(IncomeButton);
         buttonPanel.add(UtilityButton);
