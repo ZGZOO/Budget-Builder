@@ -1,6 +1,9 @@
-import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
+
+import java.util.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,25 +15,26 @@ import java.awt.event.*;
  *
  * @author zhijiejennyxu
  */
-public class EntryFrame extends JFrame{
-    private CreateNewAccountFrame newAccountFrame;
+public class CreateNewAccountFrame extends JFrame{
+    private BudgetProfileModel budgetProfileModel;
+    private JTextField usernameTextField;
+    private JTextField passwordTextField;
     
-    public EntryFrame (){
-        this.setTitle("Budget Builder");
+    public CreateNewAccountFrame(){
+        this.setTitle("Create a new account");
         this.setMaximumSize(new Dimension(800,600));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         JPanel userinfoPanel = getUserinfoPanel();
         JPanel buttonPanel = getButtonPanel();
-          
-        this.add(userinfoPanel, BorderLayout.CENTER);   
+        this.add(userinfoPanel, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.SOUTH);
         
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
+    
     private JPanel getUserinfoPanel(){
         JPanel userinfoPanel = new JPanel();
         userinfoPanel.setBackground(Color.LIGHT_GRAY);
@@ -38,11 +42,11 @@ public class EntryFrame extends JFrame{
         JLabel usernameLabel = new JLabel("Username: ");
         JLabel passwordLabel = new JLabel("Password: ");
         
-        JTextField usernameTextField = new JTextField(10);
+        usernameTextField = new JTextField(10);
         usernameTextField.setPreferredSize(new Dimension(40,30));
         usernameTextField.setEditable(true);
         
-        JTextField passwordTextField = new JTextField(10);
+        passwordTextField = new JTextField(10);
         passwordTextField.setPreferredSize(new Dimension(10,20));
         passwordTextField.setEditable(true);
         
@@ -58,29 +62,44 @@ public class EntryFrame extends JFrame{
     
     private JPanel getButtonPanel(){
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(Color.DARK_GRAY);
+        
+        JButton nextButton = new JButton("NEXT");
+        JButton backButton = new JButton("BACK");
+        
+        buttonPanel.add(backButton);
+        buttonPanel.add(nextButton);
         Dimension buttonSize = new Dimension(100,40);
-        JButton loginButton = new JButton("Log In");
-        loginButton.setMaximumSize(buttonSize);
+        backButton.setMaximumSize(buttonSize);
+        nextButton.setMaximumSize(buttonSize);
         
-        JButton createNewAccountButton = new JButton("Create a new account.");
-        createNewAccountButton.setMaximumSize(buttonSize);
+        buttonPanel.add(backButton);
+        buttonPanel.add(nextButton);
         
-        GridLayout gridLayout = new GridLayout(0,1);
-        buttonPanel.setLayout(gridLayout);
-        buttonPanel.add(loginButton);
-        buttonPanel.add(createNewAccountButton);
-        
-        createNewAccountButton.addActionListener(new ActionListener(){
+        backButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 dispose();
-                newAccountFrame = new CreateNewAccountFrame();
-                newAccountFrame.pack();
-                newAccountFrame.setLocationRelativeTo(null);
-                newAccountFrame.setVisible(true);
+                EntryFrame entryFrame = new EntryFrame();
+            }
+        });
+        
+        nextButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                String username = usernameTextField.getText();
+                String password = passwordTextField.getText();
+                budgetProfileModel = new BudgetProfileModel();
+                budgetProfileModel.createNewProfile(username, password);
+                
+                //for testing, delete later
+                Iterator it = budgetProfileModel.iterator();
+                if(it.hasNext()){
+                    System.out.print(it.next().toString());
+                }
+                
+                dispose();
+                CategoryFrame categories = new CategoryFrame(budgetProfileModel);
             }
         });
         
         return buttonPanel;
-    } 
+    }
 }

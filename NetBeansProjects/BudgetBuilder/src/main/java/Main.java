@@ -14,9 +14,12 @@ import javax.swing.*;
 public class Main {
     
     public static void main (String[] args){
+        /*
         JFrame window = new EntryFrame();
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+        */
+        JFrame window = new CreateNewAccountFrame();
     }
 }
