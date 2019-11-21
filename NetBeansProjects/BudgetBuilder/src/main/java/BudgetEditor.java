@@ -15,8 +15,9 @@ public class BudgetEditor {
     }
 
     //adds to ArrayList in currentProfile
-    public void addIncome(Income category) {
-        currentProfile.getIncomeList().add(category);
+    public void addIncome(Income income) {
+        System.out.println(income);
+        currentProfile.getIncomeList().add(income);
     }
 
     //adds to ArrayList in currentProfile
@@ -27,7 +28,8 @@ public class BudgetEditor {
     public void deleteIncome(String category) {
         ArrayList<Income> list = currentProfile.getIncomeList();
         for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).getCategory() == category) {
+            if (list.get(i).getCategory().equals(category)) {
+                System.out.println(category);
                 list.remove(i);
                 break; //End loop once object with matching category type is found
             }
@@ -67,6 +69,10 @@ public class BudgetEditor {
         }
     }
 
-
-
+    @Override
+    public String toString() {
+        return "BudgetEditor{" +
+                "currentProfile=" + currentProfile +
+                '}';
+    }
 }

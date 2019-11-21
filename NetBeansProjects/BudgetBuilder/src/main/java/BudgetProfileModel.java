@@ -3,16 +3,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class BudgetProfileModel implements Iterable {
-    ArrayList<BudgetProfile> profileList;
+    private static BudgetProfileModel singleton = new BudgetProfileModel();
+    private ArrayList<BudgetProfile> profileList = new ArrayList<BudgetProfile>(10);
 
-    public BudgetProfileModel() {
-        profileList = new ArrayList<BudgetProfile>();
+    private BudgetProfileModel() {
     }
 
-    public void createNewProfile(String userName, String password) {
-        profileList.add(new BudgetProfile(userName, password));
+    public static void createNewProfile(String userName, String password) {
+        singleton.profileList.add(new BudgetProfile(userName, password));
     }
 
+    public static BudgetProfileModel getSingleton() {
+        return singleton;
+    }
 
     //returns profile if found, null if not found
     public BudgetProfile findProfile(String userName, String password) {
@@ -22,10 +25,8 @@ public class BudgetProfileModel implements Iterable {
 
         while(it.hasNext()) {
             budgetProfile = it.next();
-            if(budgetProfile.getUserName().compareTo(userName) == 0)
-            {
-                if(budgetProfile.getPassword().compareTo(password) == 0)
-                {
+            if (budgetProfile.getUserName().compareTo(userName) == 0) {
+                if (budgetProfile.getPassword().compareTo(password) == 0) {
                     profileFound = true;
                     break; //matching profile found
                 }
@@ -33,14 +34,15 @@ public class BudgetProfileModel implements Iterable {
         }
 
         //checkpoint
-        if(profileFound == false) {
-            budgetProfile = null;
+        if (profileFound) {
+            return budgetProfile;
         }
 
-        return budgetProfile;
+        System.out.println("Couldn't find User Profile");
+        return null;
     }
 
     public Iterator<BudgetProfile> iterator() {
-        return profileList.iterator();
+        return singleton.profileList.iterator();
     }
 }

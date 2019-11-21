@@ -1,22 +1,40 @@
 public class User {
 
-    static int numOfObjects = 0;
-    private int id;
-    private String name;
-    private String password;
+    private static String name = "";
+    private static String password = "";
+    private static User singleton = new User(name, password);
 
-    public User (String name, String password) {
-        this.name = name;
-        this.password = password;
-        this.id = numOfObjects + 1;
+    private User(String name, String password) {
+        singleton.name = name;
+        singleton.password = password;
+    }
+
+    public static void setUser(String name, String password) {
+        singleton.name = name;
+        singleton.password = password;
+    }
+
+    public static User getSingleton() {
+        if (singleton == null) {
+            singleton = new User(name, password);
+        }
+        return singleton;
     }
 
     public String getName() {
-        return name;
+        return singleton.name;
     }
 
     public String getPassword() {
-        return password;
+        return singleton.password;
+    }
+
+    public static void setName(String name) {
+        if (singleton != null) singleton.name = name;
+    }
+
+    public static void setPassword(String password) {
+        if (singleton != null) singleton.password = password;
     }
 
     @Override

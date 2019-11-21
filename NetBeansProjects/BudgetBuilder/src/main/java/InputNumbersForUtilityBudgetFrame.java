@@ -120,17 +120,13 @@ public class InputNumbersForUtilityBudgetFrame extends JFrame{
 
     private JPanel getButtonPanel(){
         backButton = new JButton("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-                                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                             // add actions
-                                         }
+        backButton.addActionListener(evt -> {
+            // add actions
         });
 
-        saveButton = new JButton("Save");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //add actions
-            }
+        saveButton = new JButton("Add");
+        saveButton.addActionListener(evt -> {
+            //add actions
         });
 
         JPanel button_Panel = new JPanel();
@@ -142,7 +138,7 @@ public class InputNumbersForUtilityBudgetFrame extends JFrame{
                                 .addContainerGap()
                                 .addComponent(backButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
         buttonPanelLayout.setVerticalGroup(

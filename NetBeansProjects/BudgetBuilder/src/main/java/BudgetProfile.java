@@ -1,16 +1,19 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class BudgetProfile{
+public class BudgetProfile {
+
     private String userName;
     private String password;
-    private ArrayList<Income> incomeList= new ArrayList<Income>();
+    private ArrayList<Income> incomeList;
     private double savings;
-    private ArrayList<Spending> spendingList= new ArrayList<Spending>();
+    private ArrayList<Spending> spendingList;
 
     public BudgetProfile(String userName, String password) {
         this.userName = userName;
         this.password = password;
+        incomeList = new ArrayList<>();
+        spendingList = new ArrayList<>();
     }
 
     public String getUserName() {
@@ -45,4 +48,11 @@ public class BudgetProfile{
         return incomeList.iterator();
     }
 
+    @Override
+    public String toString() {
+        return "User {" +
+                "name='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

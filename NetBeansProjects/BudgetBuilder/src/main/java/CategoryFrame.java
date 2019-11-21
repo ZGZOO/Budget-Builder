@@ -1,21 +1,26 @@
 import javax.swing.*;
 import java.awt.*;
 
+
 public class CategoryFrame extends JFrame {
     private JFrame incomeFrame;
     private JFrame UtilityFrame;
     private JFrame SavingGoalFrame;
     private JFrame spendingGraphFrame;
+    public static BudgetProfile budgetProfile;
 
-    public CategoryFrame() throws HeadlessException {
+
+    public CategoryFrame(BudgetProfile budgetProfile) throws HeadlessException {
+        this.budgetProfile = budgetProfile;
         this.setTitle("Budget Builder");
-        this.setPreferredSize(new Dimension(1200,900));
+        this.setPreferredSize(new Dimension(1200, 900));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         JPanel title = getTitlePanel();
         JPanel buttonPanel = getButtonsPanel();
         this.add(title, BorderLayout.NORTH);
         this.add(buttonPanel, BorderLayout.CENTER);
     }
+
 
     public JPanel getTitlePanel() {
         JPanel titlePanel = new JPanel();
@@ -25,11 +30,12 @@ public class CategoryFrame extends JFrame {
         return titlePanel;
     }
 
+
     public JPanel getButtonsPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setMaximumSize(new Dimension(100, 150));
         Dimension buttonSize = new Dimension(60, 20);
-        buttonPanel.setLayout(new GridLayout(3,1, 30, 30));
+        buttonPanel.setLayout(new GridLayout(3, 1, 30, 30));
         JButton IncomeButton = new JButton("Income Needed");
         IncomeButton.setPreferredSize(buttonSize);
         IncomeButton.setFont(new Font("SansSerif", Font.BOLD, 50));
@@ -51,8 +57,8 @@ public class CategoryFrame extends JFrame {
             incomeFrame.setVisible(true);
         });
 
-        UtilityButton.addActionListener( e -> {
-            UtilityFrame = new InputNumbersForUtilityBudgetFrame();
+        UtilityButton.addActionListener(e -> {
+            UtilityFrame = new UtilityFrame();
             UtilityFrame.pack();
             UtilityFrame.setLocationRelativeTo(null);
             UtilityFrame.setVisible(true);

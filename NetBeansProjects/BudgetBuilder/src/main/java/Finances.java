@@ -22,4 +22,12 @@ public class Finances {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "Finances{" +
+                "category='" + category + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
 }
