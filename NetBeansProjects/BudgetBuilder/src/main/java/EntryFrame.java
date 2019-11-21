@@ -24,7 +24,6 @@ public class EntryFrame extends JFrame {
         model = BudgetProfileModel.getSingleton();
         //FOR TESTING PURPOSE ONLY
         model.createNewProfile("Chris", "Gil");
-        User.setUser("Chris", "Gil");
     }
 
     private JPanel getUserInfoPanel() {

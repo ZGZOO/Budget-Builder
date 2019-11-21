@@ -1,26 +1,22 @@
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class UtilityFrame extends JFrame {
+public class SavingFrame extends JFrame {
 
     private JPanel IncomePanel;
-    private JPanel SavingsPanel;
+    private JPanel SpendingPanel;
     private JPanel UtilityPanel; // Where Back and Display Graph Buttons are
     private JPanel FinanceListPanel;
     private JPanel mainUtilityPanel;
-    private JPanel SavingComponent = new JPanel();
-    private JLabel SavingTextLabel = new JLabel("");
-    private JLabel SavingAmountLabel = new JLabel("");
 
     private BudgetEditor budgetEditor;
     private BudgetProfileModel model;
     private BudgetProfile profile;
     private BudgetAnalysis budgetAnalysis;
 
-    public UtilityFrame() {
+    public SavingFrame() {
         model = BudgetProfileModel.getSingleton();
         try {
             profile = CategoryFrame.budgetProfile;
@@ -31,7 +27,7 @@ public class UtilityFrame extends JFrame {
             JOptionPane.showMessageDialog(new JFrame(), "Error");
         }
 
-        this.setTitle("Find " + profile.getUserName() + " Income Needed");
+        this.setTitle("Find " + profile.getUserName() + " Saving Goal");
         this.setPreferredSize(new Dimension(1000, 800));
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -43,7 +39,7 @@ public class UtilityFrame extends JFrame {
 
     public void setUpFrame() {
         setMainUtilityCotainer();
-        JLabel mainTitle = new JLabel("Utility Budget");
+        JLabel mainTitle = new JLabel("Saving Goal");
         mainTitle.setFont(new Font("Century", Font.ITALIC, 60));
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         this.add(mainTitle, BorderLayout.NORTH);
@@ -56,11 +52,11 @@ public class UtilityFrame extends JFrame {
         mainUtilityPanel = new JPanel();
         mainUtilityPanel.setLayout(new GridLayout(3, 1));
         setIncomePanel();
-        setSavingsPanel();
+        setSpendingPanel();
         setFinanceListPanel();
         setUtilityPanel();
         mainUtilityPanel.add(IncomePanel);
-        mainUtilityPanel.add(SavingsPanel);
+        mainUtilityPanel.add(SpendingPanel);
         mainUtilityPanel.add(UtilityPanel);
     }
 
@@ -103,66 +99,38 @@ public class UtilityFrame extends JFrame {
         });
     }
 
-    public void setSavingsPanel() {
+    public void setSpendingPanel() {
         Font font = new Font("Century", Font.BOLD, 30);
-        JLabel SavingText = new JLabel("SAVING  ");
-        SavingText.setFont(new Font("Century", Font.BOLD, 20));
-        SavingText.setHorizontalAlignment(JLabel.CENTER);
-        JTextField SavingAmount = new JTextField("$");
-        SavingAmount.setHorizontalAlignment(JLabel.CENTER);
-        SavingAmount.setFont(font);
-        JLabel SavingAmountText = new JLabel("");
-        SavingAmountText.setHorizontalAlignment(JLabel.CENTER);
-        SavingAmountText.setFont(font);
-        SavingAmountText.setForeground(Color.orange);
-        // border for the label. Easier to see the set amount
-        LineBorder border = new LineBorder(Color.BLACK, 2, true);
-        SavingAmountText.setBorder(border);
-        // Placing the label at the center of the
-        SavingAmountText.setVerticalAlignment(JLabel.CENTER);
-        SavingAmountText.setHorizontalAlignment(JLabel.CENTER);
+        JLabel SpendingText = new JLabel("Spending  ");
+        SpendingText.setFont(new Font("Century", Font.BOLD, 20));
+        SpendingText.setHorizontalAlignment(JLabel.CENTER);
+        JTextField SpendingName = new JTextField("Rent");
+        SpendingName.setFont(font);
+        SpendingName.setHorizontalAlignment(JLabel.CENTER);
+        JTextField SpendingAmount = new JTextField("$");
+        SpendingAmount.setHorizontalAlignment(JLabel.CENTER);
+        SpendingAmount.setFont(font);
 
-        JButton SavingSetButton = new JButton("Save");
-        SavingSetButton.setFont(font);
-        SavingsPanel = new JPanel();
-        SavingsPanel.setLayout(new GridLayout(1, 4));
+        JButton SpendingSetButton = new JButton("Add");
+        SpendingSetButton.setFont(font);
+        SpendingPanel = new JPanel();
+        SpendingPanel.setLayout(new GridLayout(1, 4));
 
-        SavingsPanel.add(SavingText);
-        SavingsPanel.add(SavingAmount);
-        SavingsPanel.add(SavingSetButton);
-        SavingsPanel.add(SavingAmountLabel);
+        SpendingPanel.add(SpendingText);
+        SpendingPanel.add(SpendingName);
+        SpendingPanel.add(SpendingAmount);
+        SpendingPanel.add(SpendingSetButton);
 
-        SavingSetButton.addActionListener(e -> {
+        SpendingSetButton.addActionListener(e -> {
             // action for Saving
             try { // when user does not input the amount for income and press Add button
                 // For backend
-                double amount = Double.parseDouble(SavingAmount.getText().substring(1));
-                if (SavingTextLabel.getText().equals("")) {
-                    SavingComponent.setBackground(Color.ORANGE);
-                    SavingComponent.setLayout(new GridLayout(1, 2));
-                    SavingTextLabel.setText("Saving");
-                    SavingTextLabel.setFont(new Font("Century", Font.BOLD, 14));
-                    SavingTextLabel.setHorizontalAlignment(JLabel.CENTER);
-                    SavingTextLabel.setForeground(Color.WHITE);
-                    SavingAmountLabel.setText(("$" + amount));
-                    SavingAmountLabel.setFont(new Font("Century", Font.BOLD, 14));
-                    SavingAmountLabel.setHorizontalAlignment(JLabel.CENTER);
-                    SavingAmountLabel.setForeground(Color.WHITE);
-                    SavingComponent.add(SavingTextLabel);
-                    SavingComponent.add(SavingAmountLabel);
-                    FinanceListPanel.add(SavingComponent);
-                } else {
-                    SavingAmountLabel.setText(("$" + amount));
-                    SwingUtilities.updateComponentTreeUI(this);
-                }
-
-                BevelBorder border2 = new BevelBorder(BevelBorder.RAISED);
-                SavingComponent.setBorder(border2);
-                profile.setSavings(amount);
-                SavingAmountLabel.setText(SavingAmount.getText());
-                System.out.println(profile.getSavings());
+                budgetEditor.addSpending(new Spending(SpendingName.getText(), Double.parseDouble(SpendingAmount.getText().substring(1))));
+                JPanel listComponent = createSpendingComponent(SpendingName.getText(), Double.parseDouble(SpendingAmount.getText().substring(1)));
+                FinanceListPanel.add(listComponent);
+                SwingUtilities.updateComponentTreeUI(this);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(new JFrame(), "Please enter proper amount for income");
+                JOptionPane.showMessageDialog(new JFrame(), "Please enter proper amount for Spending");
             }
         });
     }
@@ -192,11 +160,10 @@ public class UtilityFrame extends JFrame {
         GraphButton.addActionListener(e -> {
             // action
             JOptionPane.showMessageDialog(new JFrame(), "Hello " + profile.getUserName() + ",\n " +
-                    " Your total Spending is $" + budgetAnalysis.calculateSpending());
-            System.out.println(budgetAnalysis.calculateSpending());
+                    profile.getUserName() + "'s total Saving is $" + budgetAnalysis.calculateSavings());
+            System.out.println(budgetAnalysis.calculateSavings());
             SwingUtilities.updateComponentTreeUI(this);
         });
-
     }
 
     public void setFinanceListPanel() {
@@ -208,10 +175,15 @@ public class UtilityFrame extends JFrame {
         FinanceListPanel.add(ListTitle);
 
         // When user already has the data stored in the profile, this shows income list
-        if (profile.getIncomeList().size() > 0) {
+        if (profile.getIncomeList().size() > 0 || profile.getSpendingList().size() > 0) {
             ArrayList<Income> incomeList = profile.getIncomeList();
+            ArrayList<Spending> spendingList = profile.getSpendingList();
             for (int i = 0; i < incomeList.size(); i++) {
                 JPanel listComponent = createIncomeComponent(incomeList.get(i).getCategory(), incomeList.get(i).getAmount());
+                FinanceListPanel.add(listComponent);
+            }
+            for (int j = 0; j < spendingList.size(); j++) {
+                JPanel listComponent = createSpendingComponent(spendingList.get(j).getCategory(), spendingList.get(j).getAmount());
                 FinanceListPanel.add(listComponent);
             }
         }
@@ -242,4 +214,28 @@ public class UtilityFrame extends JFrame {
         return listPanel;
     }
 
+    public JPanel createSpendingComponent(String category, double amount) {
+        JPanel listPanel = new JPanel();
+        listPanel.setLayout(new GridLayout(1, 4));
+        JLabel listName = new JLabel(category);
+        JLabel listAmount = new JLabel(("$" + amount));
+        JLabel sign = new JLabel("-");
+        sign.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+        sign.setForeground(Color.RED);
+        sign.setHorizontalAlignment(JLabel.CENTER);
+        JButton deleteButton = new JButton("Delete");
+        listPanel.add(sign);
+        listPanel.add(listName);
+        listPanel.add(listAmount);
+        listPanel.add(deleteButton);
+        BevelBorder border = new BevelBorder(BevelBorder.RAISED);
+        listPanel.setBorder(border);
+        deleteButton.addActionListener(e -> {
+            // action for deleting
+            budgetEditor.deleteSpending(listName.getText());
+            FinanceListPanel.remove(listPanel);
+            SwingUtilities.updateComponentTreeUI(this);
+        });
+        return listPanel;
+    }
 }

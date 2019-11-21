@@ -39,7 +39,7 @@ public class BudgetEditor {
     public void deleteSpending(String category) {
         ArrayList<Spending> list = currentProfile.getSpendingList();
         for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).getCategory() == category) {
+            if (list.get(i).getCategory().equals(category)) {
                 list.remove(i);
                 break; //End loop once object with matching category type is found
             }
@@ -51,7 +51,7 @@ public class BudgetEditor {
     public void editIncome(String category, double amount) {
         ArrayList<Income> list = currentProfile.getIncomeList();
         for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).getCategory() == category) {
+            if (list.get(i).getCategory().equals(category)) {
                 list.get(i).setAmount(amount);
                 break; //End loop once object with matching category type is found
             }
@@ -62,7 +62,7 @@ public class BudgetEditor {
     public void editSpending(String category, double amount) {
         ArrayList<Spending> list = currentProfile.getSpendingList();
         for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).getCategory() == category) {
+            if (list.get(i).getCategory().equals(category)) {
                 list.get(i).setAmount(amount);
                 break; //End loop once object with matching category type is found
             }

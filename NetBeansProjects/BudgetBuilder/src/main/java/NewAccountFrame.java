@@ -89,9 +89,6 @@ public class NewAccountFrame extends JFrame {
             String Username = usernameTextField.getText();
             @SuppressWarnings("deprecation")
             String Password = passwordTextField.getText();
-
-            User.setUser(Username, Password);
-
             model.createNewProfile(Username, Password);
             BudgetProfile profile = model.findProfile(Username, Password);
 

@@ -5,7 +5,7 @@ import java.awt.*;
 public class CategoryFrame extends JFrame {
     private JFrame incomeFrame;
     private JFrame UtilityFrame;
-    private JFrame SavingGoalFrame;
+    private JFrame savingFrame;
     private JFrame spendingGraphFrame;
     public static BudgetProfile budgetProfile;
 
@@ -66,10 +66,10 @@ public class CategoryFrame extends JFrame {
 
         SavingButton.addActionListener(e -> {
             try {
-                SavingGoalFrame = new InputNumbersForSavingGoalFrame();
-                SavingGoalFrame.pack();
-                SavingGoalFrame.setLocationRelativeTo(null);
-                SavingGoalFrame.setVisible(true);
+                savingFrame = new SavingFrame();
+                savingFrame.pack();
+                savingFrame.setLocationRelativeTo(null);
+                savingFrame.setVisible(true);
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
