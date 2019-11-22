@@ -43,8 +43,8 @@ public class UtilityFrame extends JFrame {
 
     public void setUpFrame() {
         setMainUtilityCotainer();
-        JLabel mainTitle = new JLabel("Utility Budget");
-        mainTitle.setFont(new Font("Century", Font.ITALIC, 60));
+        JLabel mainTitle = new JLabel("How much is my utility budget this month?");
+        mainTitle.setFont(new Font("Century", Font.ITALIC, 40));
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         this.add(mainTitle, BorderLayout.NORTH);
         this.add(mainUtilityPanel, BorderLayout.CENTER);
@@ -105,7 +105,7 @@ public class UtilityFrame extends JFrame {
 
     public void setSavingsPanel() {
         Font font = new Font("Century", Font.BOLD, 30);
-        JLabel SavingText = new JLabel("Enter Your Saving:");
+        JLabel SavingText = new JLabel("Enter Your Saving Goal:");
         SavingText.setFont(new Font("Century", Font.BOLD, 20));
         SavingText.setHorizontalAlignment(JLabel.CENTER);
         JTextField SavingAmount = new JTextField("$");
@@ -139,7 +139,7 @@ public class UtilityFrame extends JFrame {
                 if (SavingTextLabel.getText().equals("")) {
                     SavingComponent.setBackground(Color.ORANGE);
                     SavingComponent.setLayout(new GridLayout(1, 2));
-                    SavingTextLabel.setText("Saving");
+                    SavingTextLabel.setText("Saving Goal");
                     SavingTextLabel.setFont(new Font("Century", Font.BOLD, 14));
                     SavingTextLabel.setHorizontalAlignment(JLabel.CENTER);
                     SavingTextLabel.setForeground(Color.WHITE);
@@ -190,9 +190,9 @@ public class UtilityFrame extends JFrame {
 
         GraphButton.addActionListener(e -> {
             // action
-            JOptionPane.showMessageDialog(new JFrame(), "Hello " + profile.getUserName() + ",\n " +
-                    " Your total Spending is $" + budgetAnalysis.calculateSpending());
-            System.out.println(budgetAnalysis.calculateSpending());
+            JOptionPane.showMessageDialog(new JFrame(), "Hello " + profile.getUserName() + ",\n" +
+                    "Your total available budget is $" + budgetAnalysis.calculateSpendingBudget() + ".");
+            System.out.println(budgetAnalysis.calculateSpendingBudget());
             SwingUtilities.updateComponentTreeUI(this);
         });
 

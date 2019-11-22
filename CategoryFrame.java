@@ -5,17 +5,26 @@ import java.awt.event.ActionListener;
 
 
 public class CategoryFrame extends JFrame {
+//    private JFrame incomeFrame;
+//    private JFrame utilityFrame;
+//    private JFrame savingFrame;
+//    private JFrame spendingGraphFrame;
+//    public static BudgetProfile budgetProfile;
+//    private BudgetAnalysis analysis;
+//
+//    private BudgetProfileModel model;
+//    private BudgetProfile profile;
     private JFrame incomeFrame;
-    private JFrame UtilityFrame;
+    private JFrame utilityFrame;
     private JFrame savingFrame;
     private JFrame spendingGraphFrame;
     public static BudgetProfile budgetProfile;
-
-    private BudgetProfileModel model;
-    private BudgetProfile profile;
+    private BudgetAnalysis analysis;
+    
 
     public CategoryFrame(BudgetProfile budgetProfile) throws HeadlessException {
         this.budgetProfile = budgetProfile;
+        this.analysis = new BudgetAnalysis(budgetProfile);
         this.setTitle("Budget Builder");
         this.setPreferredSize(new Dimension(1200, 900));
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -31,15 +40,7 @@ public class CategoryFrame extends JFrame {
 
     public JPanel getTitlePanel() {
         JPanel titlePanel = new JPanel();
-        model = BudgetProfileModel.getSingleton();
-        try {
-            profile = CategoryFrame.budgetProfile;
-            profile = model.findProfile(profile.getUserName(), profile.getPassword());
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(new JFrame(), "Error");
-        }
-
-        JLabel title = new JLabel("Hello " + profile.getUserName() + "! What would you like to calculate? ");
+        JLabel title = new JLabel("Hello " + budgetProfile.getUserName() + "! What would you like to calculate? ");
         title.setFont(new Font("Century", Font.ITALIC, 50));
         titlePanel.add(title);
         return titlePanel;
@@ -51,13 +52,13 @@ public class CategoryFrame extends JFrame {
         choicePanel.setMaximumSize(new Dimension(80, 100));
         Dimension buttonSize = new Dimension(60, 10);
         choicePanel.setLayout(new GridLayout(3, 1, 20, 20));
-        JButton IncomeButton = new JButton("Income Needed");
+        JButton IncomeButton = new JButton("Minimum Income Needed Per Month");
         IncomeButton.setPreferredSize(buttonSize);
         IncomeButton.setFont(new Font("SansSerif", Font.BOLD, 50));
-        JButton UtilityButton = new JButton("Utility Budget");
+        JButton UtilityButton = new JButton("Utility Budget Per Month");
         UtilityButton.setPreferredSize(buttonSize);
         UtilityButton.setFont(new Font("SansSerif", Font.BOLD, 50));
-        JButton SavingButton = new JButton("Savings");
+        JButton SavingButton = new JButton("Leisure Budget Per Month");
         SavingButton.setPreferredSize(buttonSize);
         SavingButton.setFont(new Font("SansSerif", Font.BOLD, 50));
 
@@ -73,10 +74,10 @@ public class CategoryFrame extends JFrame {
         });
 
         UtilityButton.addActionListener(e -> {
-            UtilityFrame = new UtilityFrame();
-            UtilityFrame.pack();
-            UtilityFrame.setLocationRelativeTo(null);
-            UtilityFrame.setVisible(true);
+            utilityFrame = new UtilityFrame();
+            utilityFrame.pack();
+            utilityFrame.setLocationRelativeTo(null);
+            utilityFrame.setVisible(true);
         });
 
         SavingButton.addActionListener(e -> {
@@ -107,17 +108,14 @@ public class CategoryFrame extends JFrame {
         logOutButton.setPreferredSize(buttonSize);        
         
         
-        seeBudgetButton.addActionListener(e -> {
-            
+        seeBudgetButton.addActionListener((ActionEvent e) -> {
+            JOptionPane.showMessageDialog(new JFrame(), analysis.toString());
         });
         
-        logOutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int input = JOptionPane.showConfirmDialog(new JFrame(), "Are you sure to log out?", "Select an Option", JOptionPane.YES_NO_OPTION);
-                if(input == JOptionPane.YES_OPTION)
-                    System.exit(0);
-            }
+        logOutButton.addActionListener((ActionEvent e) -> {
+            int input = JOptionPane.showConfirmDialog(new JFrame(), "Are you sure to log out?", "Select an Option", JOptionPane.YES_NO_OPTION);
+            if(input == JOptionPane.YES_OPTION)
+                dispose();
         });
         
         buttonPanel.setLayout(new GridLayout(1,2,5,100));

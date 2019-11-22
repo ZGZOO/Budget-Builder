@@ -27,7 +27,7 @@ public class SavingFrame extends JFrame {
             JOptionPane.showMessageDialog(new JFrame(), "Error");
         }
 
-        this.setTitle("Find " + profile.getUserName() + "'s Saving Goal");
+        this.setTitle("Find " + profile.getUserName() + "'s Possible Saving");
         this.setPreferredSize(new Dimension(1000, 800));
         this.setLayout(new BorderLayout());
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -39,8 +39,8 @@ public class SavingFrame extends JFrame {
 
     public void setUpFrame() {
         setMainUtilityCotainer();
-        JLabel mainTitle = new JLabel("Saving Goal");
-        mainTitle.setFont(new Font("Century", Font.ITALIC, 60));
+        JLabel mainTitle = new JLabel("How much can I save this month?");
+        mainTitle.setFont(new Font("Century", Font.ITALIC, 40));
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         this.add(mainTitle, BorderLayout.NORTH);
         this.add(mainUtilityPanel, BorderLayout.CENTER);
@@ -159,9 +159,9 @@ public class SavingFrame extends JFrame {
 
         GraphButton.addActionListener(e -> {
             // action
-            JOptionPane.showMessageDialog(new JFrame(), "Hello " + profile.getUserName() + ",\n " +
-                    profile.getUserName() + "'s total Saving is $" + budgetAnalysis.calculateSavings());
-            System.out.println(budgetAnalysis.calculateSavings());
+            JOptionPane.showMessageDialog(new JFrame(), "Hello " + profile.getUserName() + ",\n" + 
+                    "Your total saving this month will be $" + budgetAnalysis.calculateSavingGoal() + ".");
+            System.out.println(budgetAnalysis.calculateSavingGoal());
             SwingUtilities.updateComponentTreeUI(this);
         });
     }

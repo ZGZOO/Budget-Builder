@@ -54,8 +54,8 @@ public class IncomeFrame extends JFrame {
 
     public void setUpFrame() {
         setMainUtilityCotainer();
-        JLabel mainTitle = new JLabel("How Much Income Is Needed?");
-        mainTitle.setFont(new Font("Century", Font.ITALIC, 60));
+        JLabel mainTitle = new JLabel("How much income do I need this month?");
+        mainTitle.setFont(new Font("Century", Font.ITALIC, 40));
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         this.add(mainTitle, BorderLayout.NORTH);
         this.add(mainUtilityPanel, BorderLayout.CENTER);
@@ -103,7 +103,7 @@ public class IncomeFrame extends JFrame {
             try { // when user does not input the amount for income and press Add button
                 // For backend
                 budgetEditor.addSpending(new Spending(spendingName.getText(), Double.parseDouble(spendingCost.getText().substring(1))));
-                JPanel listComponent = createIncomeComponent(spendingName.getText(), Double.parseDouble(spendingCost.getText().substring(1)));
+                JPanel listComponent = createSpendingComponent(spendingName.getText(), Double.parseDouble(spendingCost.getText().substring(1)));
                 financeListPanel.add(listComponent);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(new JFrame(), "Please enter proper amount for income");
@@ -116,7 +116,7 @@ public class IncomeFrame extends JFrame {
 
     public void setSavingsPanel() {
         Font font = new Font("Century", Font.BOLD, 30);
-        JLabel SavingText = new JLabel("Enter Your Saving:");
+        JLabel SavingText = new JLabel("Enter Your Saving Goal:");
         SavingText.setFont(new Font("Century", Font.BOLD, 20));
         SavingText.setHorizontalAlignment(JLabel.CENTER);
         JTextField SavingAmount = new JTextField("$");
@@ -202,9 +202,9 @@ public class IncomeFrame extends JFrame {
 
         GraphButton.addActionListener(e -> {
             // action
-            JOptionPane.showMessageDialog(new JFrame(), "Hello " + profile.getUserName() + ",\n " +
-                    " Your total Spending is $" + budgetAnalysis.calculateSpending());
-            System.out.println(budgetAnalysis.calculateSpending());
+            JOptionPane.showMessageDialog(new JFrame(), "Hello " + profile.getUserName() + ",\n" +
+                    "You need to make at least $" + budgetAnalysis.calculateIncome() + ". Good luck! :)");
+            System.out.println(budgetAnalysis.calculateSpendingBudget());
             SwingUtilities.updateComponentTreeUI(this);
         });
 
@@ -219,25 +219,25 @@ public class IncomeFrame extends JFrame {
         financeListPanel.add(ListTitle);
 
         // When user already has the data stored in the profile, this shows income list
-        if (profile.getIncomeList().size() > 0) {
-            ArrayList<Income> incomeList = profile.getIncomeList();
-            for (int i = 0; i < incomeList.size(); i++) {
-                JPanel listComponent = createIncomeComponent(incomeList.get(i).getCategory(), incomeList.get(i).getAmount());
+        if (profile.getSpendingList().size() > 0) {
+            ArrayList<Income> spendingList = profile.getIncomeList();
+            for (int i = 0; i < spendingList.size(); i++) {
+                JPanel listComponent = createSpendingComponent(spendingList.get(i).getCategory(), spendingList.get(i).getAmount());
                 financeListPanel.add(listComponent);
             }
         }
     }
 
-    public JPanel createIncomeComponent(String category, double amount) {
+    public JPanel createSpendingComponent(String category, double amount) {
         JPanel listPanel = new JPanel();
         listPanel.setLayout(new GridLayout(1, 4));
         JLabel listName = new JLabel(category);
         JLabel listAmount = new JLabel((("$" + amount)));
         JButton deleteButton = new JButton("Delete");
-        JLabel sign = new JLabel("+");
+        JLabel sign = new JLabel("-");
         sign.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
         sign.setHorizontalAlignment(JLabel.CENTER);
-        sign.setForeground(Color.GREEN);
+        sign.setForeground(Color.RED);
         listPanel.add(sign);
         listPanel.add(listName);
         listPanel.add(listAmount);

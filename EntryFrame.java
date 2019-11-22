@@ -8,6 +8,8 @@ public class EntryFrame extends JFrame {
     private BudgetProfileModel model;
     private JTextField usernameTextField;
     private JPasswordField passwordTextField;
+    
+
 
     public EntryFrame() {
         this.setTitle("Budget Builder");
@@ -78,7 +80,6 @@ public class EntryFrame extends JFrame {
 
         createNewAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose();
                 newAccountFrame = new NewAccountFrame(model);
                 newAccountFrame.pack();
                 newAccountFrame.setLocationRelativeTo(null);
